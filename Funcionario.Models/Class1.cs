@@ -31,8 +31,14 @@ namespace Funcionario.Models
 
         [Key]
         public int PK_Funcionario { get; set; }
+        
+        [Required]
         public string Nome { get; set; }
+        [Required]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
         public System.DateTime DataNascimento { get; set; }
         public Nullable<decimal> Salario { get; set; }
         public Nullable<int> FK_Estado { get; set; }
