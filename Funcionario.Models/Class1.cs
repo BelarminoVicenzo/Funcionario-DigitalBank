@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Funcionario.Models
 {
@@ -52,7 +53,8 @@ namespace Funcionario.Models
 
         [Display(Name = "Estado (UF)")]
         public Nullable<int> FK_Estado { get; set; }
-
+        
+        [ForeignKey("FK_Estado")]
         public virtual Estado Estado { get; set; }
 
     }
