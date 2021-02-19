@@ -11,8 +11,8 @@ namespace FuncionarioWeb.Controllers
     public class HomeController : Controller
     {
 
-        //EmpresaEntities db = new EmpresaEntities();
-        EmpresaContext emp = new EmpresaContext();
+        
+        
         public ActionResult Index()
         {
             return View();
@@ -21,10 +21,7 @@ namespace FuncionarioWeb.Controllers
         public ActionResult About()
         {
 
-            var es = emp.Estado.ToList().Count;
-            
-            //ViewBag.Message = "Your application description page.";
-            ViewBag.Message =es;
+            ViewBag.Message = "Your application description page.";
 
             return View();
         }
