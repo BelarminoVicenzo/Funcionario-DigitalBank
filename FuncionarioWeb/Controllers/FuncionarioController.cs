@@ -94,19 +94,20 @@ namespace FuncionarioWeb.Controllers
         }
 
         // GET: Funcionario/Delete/5
-        //public async Task<ActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Funcionario.Models.Funcionario funcionario = await db.Funcionario.FindAsync(id);
-        //    if (funcionario == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(funcionario);
-        //}
+        public async Task<ActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Funcionario.Models.Funcionario funcionario = await db.Funcionario.FindAsync(id);
+            if (funcionario == null)
+            {
+                return HttpNotFound();
+            }
+            return RedirectToAction("Index");
+
+        }
 
         // POST: Funcionario/Delete/5
         [HttpPost, ActionName("Delete")]
