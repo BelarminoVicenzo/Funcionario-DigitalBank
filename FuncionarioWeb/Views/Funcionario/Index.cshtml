@@ -11,7 +11,7 @@
     <a href="/Funcionario/Create" class="btn  pull-right"><input type="submit" value="Novo Funcionário" class="btn btn-default" /></a>
     
 </p>
-<table class="table">
+<table class="table" id="TblFunc">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.PK_Funcionario)
@@ -37,10 +37,45 @@
         </td>
        
         <td>
-            @Html.ActionLink("Alterar", "Edit", new { id=item.PK_Funcionario }) |
-            @Html.ActionLink("Excluir", "Delete", new { id=item.PK_Funcionario })
+            @Html.ActionLink("Alterar", "Edit", new { id = item.PK_Funcionario }) |
+            @Html.ActionLink("Excluir", "Delete", new { id = item.PK_Funcionario }, new { id="btnDelete", name = "btnDelete", onclick = "Delete(this)" })
+
+            
         </td>
     </tr>
 }
 
 </table>
+
+<script type="text/javascript">
+
+
+
+    function Delete(id) {
+
+
+        //var DeleteUrl = $("#btnDelete").attr('href');
+        var DeleteUrl = id.getAttribute("href");
+        
+        if (confirm("Pretende eliminar este registo ?" + DeleteUrl)) {
+                $.ajax({
+                    url: DeleteUrl,
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json",
+                    error: function (error) {
+                        alert('Erro ao eliminar. ' + error.responseText);
+                    },
+                    success: function (response) {
+
+                      window.location.reload();
+
+                    }
+                });
+            }
+
+    }
+
+
+
+</script>
