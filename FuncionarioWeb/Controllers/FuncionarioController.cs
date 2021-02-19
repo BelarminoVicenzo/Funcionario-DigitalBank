@@ -72,8 +72,7 @@ namespace FuncionarioWeb.Controllers
             {
                 return HttpNotFound();
             }
-            var nomeEstado = db.Estado.First(n=>n.PK_Estado==funcionario.FK_Estado);
-            ViewBag.FK_Estado = new SelectList(db.Estado, "PK_Estado","Nome", nomeEstado.Nome);
+            ViewBag.FK_Estado = new SelectList(db.Estado, "PK_Estado","Nome", funcionario.FK_Estado);
             return View(funcionario);
         }
 
