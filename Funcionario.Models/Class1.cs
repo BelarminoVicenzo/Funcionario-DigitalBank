@@ -45,6 +45,7 @@ namespace Funcionario.Models
 
         [Display(Name = "Data de Nascimento")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime DataNascimento { get; set; }
 
 
