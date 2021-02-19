@@ -43,7 +43,7 @@ namespace FuncionarioWeb.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "PK_Funcionario,Nome,Email,DataNascimento,Salario,FK_Estado")] Funcionario.Models.Funcionario funcionario)
         {
             if (ModelState.IsValid)
@@ -94,23 +94,23 @@ namespace FuncionarioWeb.Controllers
         }
 
         // GET: Funcionario/Delete/5
-        public async Task<ActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Funcionario.Models.Funcionario funcionario = await db.Funcionario.FindAsync(id);
-            if (funcionario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(funcionario);
-        }
+        //public async Task<ActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Funcionario.Models.Funcionario funcionario = await db.Funcionario.FindAsync(id);
+        //    if (funcionario == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(funcionario);
+        //}
 
         // POST: Funcionario/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Funcionario.Models.Funcionario funcionario = await db.Funcionario.FindAsync(id);
