@@ -30,21 +30,31 @@ namespace Funcionario.Models
     {
 
         [Key]
+        [Display(Name = "Código")]
         public int PK_Funcionario { get; set; }
 
         [Required(ErrorMessage = "Este campo não pode estar vazio")]
         public string Nome { get; set; }
-        
+
+        [Display(Name = "E-mail")]
         [Required(ErrorMessage = "Este campo não pode estar vazio")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required(ErrorMessage = "Este campo não pode estar vazio")]
+
+        [Display(Name = "Data de Nascimento")]
         [DataType(DataType.Date)]
         public System.DateTime DataNascimento { get; set; }
+
+
+        [Display(Name = "Salário: R$")]
         public Nullable<decimal> Salario { get; set; }
+
+        [Display(Name = "Estado (UF)")]
         public Nullable<int> FK_Estado { get; set; }
 
         public virtual Estado Estado { get; set; }
+
     }
 
 }
