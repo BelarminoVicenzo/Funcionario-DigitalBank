@@ -1,7 +1,7 @@
 ﻿@model Funcionario.Models.Funcionario
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Create";
 }
 <style>
     label.doispontos:after {
@@ -15,8 +15,10 @@
 
 
 
-@using (Html.BeginForm())
-{
+@*@using (Html.BeginForm())
+{*@
+
+<form name="funcionarioForm">
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
@@ -66,17 +68,57 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Salvar Cliente" class="btn btn-default" />
+                <input type="submit" @*onclick="CadastrarFuncionario()"*@ id="btnSave" value="Salvar Cliente" class="btn btn-default" />
             </div>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    </form>
+    @*}*@
 
-@section Scripts {
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+
+
+        <script type="text/javascript">
+
+
+            $(document).ready(function () {
+
+                $("#btnSave").click(function () {
+
+                    var funcionario = {
+                        Nome: $("#Nome").val(),
+                        Email: $("#Email").val(),
+                        DataNascimento: $("#DataNascimento").val(),
+                        Salario: $("#Salario").val(),
+                        FK_Estado: $("#FK_Estado").val(),
+                       
+                        
+                    };
+                    $.ajax({
+                        type: "POST",
+                        URL: "/Funcionario/Create",
+                        //dataType: "json",
+                        //contentType: "application/json",
+                        data: funcionario,
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        success: function (response) {
+                            
+                            alert(response);
+
+                        }
+                    });
+
+                });
+
+
+            });
+        </script>
+    }
