@@ -24,7 +24,7 @@ JQuery/AJAX para chamadas assíncronas.
 Foi utilizado o VC (Version Control) git, em primeiro lugar por ser um dos requisitos do projecto.
 Em segundo lugar devido a dimensão da plataforma e fácil acesso.
 
-
+Foi criada uma segunda brancha para as novas alterações.
 
 Funcionamento:
 
