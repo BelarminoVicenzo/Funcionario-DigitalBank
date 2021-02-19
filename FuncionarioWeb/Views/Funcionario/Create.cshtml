@@ -15,12 +15,12 @@
 
 
 
-@*@using (Html.BeginForm())
-{*@
+@using (Html.BeginForm())
+{
 
-<form name="funcionarioForm">
+ 
+
     @Html.AntiForgeryToken()
-
     <div class="form-horizontal">
         <h4 style="color:red">(*) Campos obrigatórios</h4>
         <hr />
@@ -73,8 +73,8 @@
         </div>
     </div>
 
-    </form>
-    @*}*@
+     
+    }
 
     <div>
         @Html.ActionLink("Back to List", "Index")
@@ -111,7 +111,7 @@
                         },
                         success: function (response) {
                             
-                            alert(response);
+                            alert("Sucess");
 
                         }
                     });
