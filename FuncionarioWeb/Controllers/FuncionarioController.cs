@@ -22,17 +22,21 @@ namespace FuncionarioWeb.Controllers
             return View(await db.Funcionario.ToListAsync());
         }
 
-        
+
 
         // GET: Funcionario/Create
         public ActionResult Create()
         {
-            var estados = new List<Estado>() { new Estado {Nome="Selecione" } };
-             
-            var estado = estados.Concat(db.Estado);
             
-            ViewBag.FK_Estado = new SelectList(estado, "PK_Estado","Nome", "Selecione");
-            return View(new Funcionario.Models.Funcionario {Salario=0.0m });
+            var estado = AdicionarSelecione();
+            ViewBag.FK_Estado = new SelectList(estado, "PK_Estado", "Nome", "Selecione");
+            return View(new Funcionario.Models.Funcionario { Salario = 0.0m });
+        }
+
+        private IEnumerable<Estado> AdicionarSelecione()
+        {
+            var estados = new List<Estado>() { new Estado { Nome = "Selecione" } };
+            return estados.Concat(db.Estado);
         }
 
         // POST: Funcionario/Create
@@ -47,6 +51,7 @@ namespace FuncionarioWeb.Controllers
                 db.Funcionario.Add(funcionario);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
+
             }
 
             return View(funcionario);
@@ -55,6 +60,9 @@ namespace FuncionarioWeb.Controllers
         // GET: Funcionario/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
+
+            
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -64,6 +72,8 @@ namespace FuncionarioWeb.Controllers
             {
                 return HttpNotFound();
             }
+            var nomeEstado = db.Estado.First(n=>n.PK_Estado==funcionario.FK_Estado);
+            ViewBag.FK_Estado = new SelectList(db.Estado, "PK_Estado","Nome", nomeEstado.Nome);
             return View(funcionario);
         }
 
@@ -71,7 +81,7 @@ namespace FuncionarioWeb.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "PK_Funcionario,Nome,Email,DataNascimento,Salario,FK_Estado")] Funcionario.Models.Funcionario funcionario)
         {
             if (ModelState.IsValid)
