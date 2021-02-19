@@ -27,8 +27,11 @@ namespace FuncionarioWeb.Controllers
         // GET: Funcionario/Create
         public ActionResult Create()
         {
-
-            ViewBag.FK_Estado = new SelectList(db.Estado, "PK_Estado","Nome");
+            var estados = new List<Estado>() { new Estado {Nome="Selecione" } };
+             
+            var estado = estados.Concat(db.Estado);
+            
+            ViewBag.FK_Estado = new SelectList(estado, "PK_Estado","Nome", "Selecione");
             return View(new Funcionario.Models.Funcionario {Salario=0.0m });
         }
 
