@@ -8,74 +8,77 @@
 
 <p>
 
-    <a href="/Funcionario/Create" class="btn  pull-right"><input type="submit" value="Novo Funcionário" class="btn btn-default" /></a>
     
+    <a href="" class="btn  pull-right"><input type="submit" value="Actualizar dados" id="btnActualizar" class="btn btn-default" /></a>
+    <a href="/Funcionario/Create" class="btn  pull-right"><input type="submit" value="Novo Funcionário" class="btn btn-default" /></a>
+
 </p>
-<table class="table" id="TblFunc">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PK_Funcionario)
-        </th>
-        
-        
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PK_Funcionario)
-        </td>
-        
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-       
-        <td>
-            @Html.ActionLink("Alterar", "Edit", new { id = item.PK_Funcionario }) |
-            @Html.ActionLink("Excluir", "Delete", new { id = item.PK_Funcionario }, new { id="btnDelete", name = "btnDelete", onclick = "Delete(this)" })
-
-            
-        </td>
-    </tr>
-}
-
-</table>
-
+ 
+<div id="funcionarioResults">
+    
+</div>
 <script type="text/javascript">
 
 
+    window.onload = function () {
+        ActualizarDados();
+    }
 
     function Delete(id) {
 
 
         //var DeleteUrl = $("#btnDelete").attr('href');
         var DeleteUrl = id.getAttribute("href");
-        
+
         if (confirm("Pretende eliminar este registo ?" + DeleteUrl)) {
-                $.ajax({
-                    url: DeleteUrl,
-                    dataType: "json",
-                    type: "POST",
-                    contentType: "application/json",
-                    error: function (error) {
-                        alert('Erro ao eliminar. ' + error.responseText);
-                    },
-                    success: function (response) {
+            $.ajax({
+                url: DeleteUrl,
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json",
+                error: function (error) {
+                    alert('Erro ao eliminar. ' + error.responseText);
+                },
+                success: function (response) {
 
-                      window.location.reload();
+                    window.location.reload();
 
-                    }
-                });
-            }
+                }
+            });
+        }
 
     }
 
+    document.getElementById('btnActualizar').addEventListener('click', ActualizarDados);
+
+    function ActualizarDados() {
+        let xhr = new XMLHttpRequest();
+        let output = '';
+       
+
+        xhr.open('GET', '/Funcionario/GetAllTest', true);
+        xhr.onload = function () {
+            var result = JSON.parse(this.responseText);
+         
+            for (var i = 0; i < result.length; i++) {
+
+                output += '<table class="table">' +
+                    '<tr><th> C&#243;digo</th><th>Nome</th>' +
+                    '<th></th></tr >' +
+                    '<tr><td>' + result[i].Id + '</td >' +
+                    '<td>' + result[i].Nome + '</td>' +
+                    '<td><a href="/Funcionario/Edit/'+result[i].Id+'">Alterar</a> |' +
+                    '<a href="/Funcionario/Delete/' + result[i].Id +'" id="btnDelete" name="btnDelete" onclick="Delete(this)">Excluir</a></td ></tr ></table > ';
+            }
+           
+            document.getElementById('funcionarioResults').innerHTML = output;
+
+        }
+        xhr.send();
+
+
+
+    }
 
 
 </script>

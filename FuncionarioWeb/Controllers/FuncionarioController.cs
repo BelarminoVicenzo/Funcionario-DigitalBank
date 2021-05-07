@@ -32,6 +32,13 @@ namespace FuncionarioWeb.Controllers
 
             return View(_db.GetAll());
         }
+        
+        //refactor code and put this into a web api
+        public JsonResult GetAllTest()
+        {
+            var  lstFun = _db.GetAll().Select(f => new { Id = f.PK_Funcionario, Nome = f.Nome }); ;
+             return Json(lstFun, JsonRequestBehavior.AllowGet);
+        }
 
 
 
