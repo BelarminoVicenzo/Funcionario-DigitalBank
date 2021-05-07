@@ -16,10 +16,21 @@ namespace FuncionarioWeb.Controllers
     {
         private EmpresaContext db = new EmpresaContext();
 
+        IEmpresaCrud<Funcionario.Models.Funcionario> _db;
+        IEmpresaCrud<Estado> _estadoAccess;
+        public FuncionarioController(IEmpresaCrud<Funcionario.Models.Funcionario> dbAccess,
+            IEmpresaCrud<Estado> estadoAccess)
+        {
+            _db = dbAccess;
+            _estadoAccess = estadoAccess;
+        }
+
         // GET: Funcionario
         public async Task<ActionResult> Index()
         {
-            return View(await db.Funcionario.ToListAsync());
+            //return View(await db.Funcionario.ToListAsync());
+
+            return View(_db.GetAll());
         }
 
 
@@ -27,7 +38,7 @@ namespace FuncionarioWeb.Controllers
         // GET: Funcionario/Create
         public ActionResult Create()
         {
-            
+
             var estado = AdicionarSelecione();
             ViewBag.FK_Estado = new SelectList(estado, "PK_Estado", "Nome", "Selecione");
             return View(new Funcionario.Models.Funcionario { Salario = 0.0m });
@@ -36,7 +47,7 @@ namespace FuncionarioWeb.Controllers
         private IEnumerable<Estado> AdicionarSelecione()
         {
             var estados = new List<Estado>() { new Estado { Nome = "Selecione" } };
-            return estados.Concat(db.Estado);
+            return estados.Concat(_estadoAccess.GetAll());
         }
 
         // POST: Funcionario/Create
@@ -61,7 +72,7 @@ namespace FuncionarioWeb.Controllers
         public async Task<ActionResult> Edit(int? id)
         {
 
-            
+
 
             if (id == null)
             {
@@ -72,7 +83,7 @@ namespace FuncionarioWeb.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.FK_Estado = new SelectList(db.Estado, "PK_Estado","Nome", funcionario.FK_Estado);
+            ViewBag.FK_Estado = new SelectList(db.Estado, "PK_Estado", "Nome", funcionario.FK_Estado);
             return View(funcionario);
         }
 

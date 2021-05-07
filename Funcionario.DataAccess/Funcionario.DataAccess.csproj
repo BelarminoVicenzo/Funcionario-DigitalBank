@@ -48,7 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EstadoCrud.cs" />
+    <Compile Include="FuncionarioCrud.cs" />
     <Compile Include="EmpresaContext.cs" />
+    <Compile Include="IEmpresaCrud.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

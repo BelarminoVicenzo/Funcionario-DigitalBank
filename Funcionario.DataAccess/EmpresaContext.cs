@@ -10,9 +10,8 @@ using Funcionario.Models;
 
 namespace Funcionario.DataAccess
 {
-    public class EmpresaContext : DbContext
+    public partial class EmpresaContext : DbContext
     {
-
 
         public EmpresaContext() : base("name=Empresa")
         {
