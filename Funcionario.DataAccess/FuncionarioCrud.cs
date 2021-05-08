@@ -33,7 +33,7 @@ namespace Funcionario.DataAccess
 
         public Models.Funcionario Get(int id)
         {
-            throw new NotImplementedException();
+            return _context.Funcionario.Find(id);
         }
 
 
