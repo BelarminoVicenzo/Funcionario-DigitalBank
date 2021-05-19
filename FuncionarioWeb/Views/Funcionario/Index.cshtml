@@ -1,84 +1,90 @@
 ﻿@model IEnumerable<Funcionario.Models.Funcionario>
 
-@{
-    ViewBag.Title = "Index";
-}
+@{ ViewBag.Title = "Funcionarios"; }
 
-<h2>Funcionários cadastrados</h2>
 
 <p>
-
-    
-    <a href="" class="btn  pull-right"><input type="submit" value="Actualizar dados" id="btnActualizar" onclick="ActualizarDados" class="btn btn-default" /></a>
-    <a href="/Funcionario/Create" class="btn  pull-right"><input type="submit" value="Novo Funcionário" class="btn btn-default" /></a>
-
+    <br />    <button class="btn btn-success create">Create New</button>
 </p>
- 
-<div id="funcionarioResults">
-    
-</div>
-<script type="text/javascript">
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataNascimento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salario)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Nome)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DataNascimento)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Salario)
+    </td>
+    <td>
+
+        <button class="btn btn-primary edit" data-id="@item.PK_Funcionario">Edit</button>
+        <button class="btn btn-danger delete" data-id="@item.PK_Funcionario">Delete</button>
+    </td>
+</tr>}
+
+</table>
 
 
-    window.onload = function () {
-        ActualizarDados();
-    }
+<div id="modal" class="modal fade" role="dialog" />
 
-    function Delete(id) {
+@section scripts{
+    <script>
+        $(function () {
 
-                 var deleteUrl = id.getAttribute("href");
-               if (confirm('Pretende eliminar este registo?')) {
-            $.ajax({
-                url: deleteUrl,
-                dataType: "json",
-                type: "POST",
-                contentType: "application/json",
-                error: function (error) {
-                    alert('Erro ao eliminar. ' + error.responseText);
-                },
-                success: function (response) {
+            //uncomment on detais page creation
+            //$(".details").click(function () {
+            //    var id = $(this).attr("data-id");
+            //    $("#modal").load("Details?id=" + id, function () {
+            //        $("#modal").modal();
+            //    })
+            //});
 
-                    
-                    location.reload();
-
-                }
+            $(".edit").click(function () {
+                var id = $(this).attr("data-id");
+                $("#modal").load("/Funcionario/Edit/" + id, function () {
+                    $("#modal").modal();
+                })
             });
-        } else {
-            event.preventDefault();
-         
-        }
 
-    }
+            $(".delete").click(function () {
+                var id = $(this).attr("data-id");
 
+                $("#modal").load("/Funcionario/Delete/" + id, function () {
+                    $("#modal").modal();
+                })
+            });
 
-    function ActualizarDados() {
-        let xhr = new XMLHttpRequest();
-        let output = '';
+            $(".create").click(function () {
+                $("#modal").load("/Funcionario/Create", function () {
+                    $("#modal").modal();
+                })
+            });
 
-        xhr.open('GET', '/Funcionario/GetAllTest', true);
-        xhr.onload = function () {
-            var result = JSON.parse(this.responseText);
-            for (var i = 0; i < result.length; i++) {
-                 
-                output += '<table class="table">' +
-                    '<tr><th> C&#243;digo</th><th>Nome</th>' +
-                    '<th></th></tr >' +
-                    '<tr><td>' + result[i].Id + '</td >' +
-                    '<td>' + result[i].Nome + '</td>' +
-                    '<td><a href="/Funcionario/Edit/'+result[i].Id+'">Alterar</a> |' +
-                    '<a href="/Funcionario/Delete/' + result[i].Id +'" id="btnDelete" name="btnDelete"'+
-                    'onclick = ' + "Delete(" + 'this'+") "+'> Excluir</a ></td ></tr ></table > ';
-            }
-          
-            document.getElementById('funcionarioResults').innerHTML = output;
-      
-             
-        }
-        xhr.send();
-
-       
-
-    }
-
-
-</script>
+        })
+    </script>
+}
