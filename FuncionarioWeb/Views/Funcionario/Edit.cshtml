@@ -1,69 +1,79 @@
 ﻿@model Funcionario.Models.Funcionario
 
-@{
-    ViewBag.Title = "Edit";
-}
-
-<h2>Edit</h2>
-
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Funcionario</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.PK_Funcionario)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+<h2>Editar</h2>
+<div class="modal-dialog">
+    <div class="modal-content">
+        @using (Html.BeginForm())
+        {
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">Editar Funcionario</h4>
             </div>
-        </div>
+            @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.PK_Funcionario)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DataNascimento, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DataNascimento, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Salario, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Salario, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Salario, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FK_Estado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("FK_Estado", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.FK_Estado, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DataNascimento, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DataNascimento, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit"  id="btnEdit" value="Save" class="btn btn-default" />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Salario, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Salario, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Salario, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FK_Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("FK_Estado", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.FK_Estado, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                </div>
+
             </div>
-        </div>
-    </div>
-}
+            <div class="modal-footer">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Editar" id="btnEdit" class="btn btn-primary" />
+                        <input type="button" value="Cancelar" class="btn btn-danger" data-dismiss="modal" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -72,43 +82,42 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-
     <script type="text/javascript">
 
 
-            $(document).ready(function () {
+        $(document).ready(function () {
 
-                $("#btnEdit").click(function () {
+            $("#btnEdit").click(function () {
 
-                   
-                    var funcionario = {
-                        PK_Funcionario: $("#PK_Funcionario").val(),
-                        Nome: $("#Nome").val(),
-                        Email: $("#Email").val(),
-                        DataNascimento: $("#DataNascimento").val(),
-                        Salario: $("#Salario").val(),
-                        FK_Estado: $("#FK_Estado").val(),
-                         
 
-                    };
-                    $.ajax({
-                        type: "POST",
-                        URL: "/Funcionario/Edit",
-                        data: funcionario,
-                        error: function (response) {
-                            alert(response.responseText);
-                            
-                        },
-                        success: function (response) {
+                var funcionario = {
+                    PK_Funcionario: $("#PK_Funcionario").val(),
+                    Nome: $("#Nome").val(),
+                    Email: $("#Email").val(),
+                    DataNascimento: $("#DataNascimento").val(),
+                    Salario: $("#Salario").val(),
+                    FK_Estado: $("#FK_Estado").val(),
 
-                            alert("Sucess");
 
-                        }
-                    });
+                };
+                $.ajax({
+                    type: "POST",
+                    URL: "/Funcionario/Edit",
+                    data: funcionario,
+                    error: function (response) {
+                        alert(response.responseText);
 
+                    },
+                    success: function (response) {
+
+                        alert("Sucess");
+
+                    }
                 });
 
-
             });
+
+
+        });
     </script>
 }
