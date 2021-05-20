@@ -27,23 +27,24 @@ namespace Funcionario.DataAccess
             return  _context.Estado.ToListAsync();
         }
 
-        public bool Update(Models.Estado item)
-        {
-            throw new NotImplementedException();
-        }
-
 
         public Task Add(Models.Estado item)
         {
             throw new NotImplementedException();
         }
 
+        public bool Update(Models.Estado item)
+        {
+            throw new NotImplementedException();
+        }
+
+
         public bool Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Models.Estado Get(int id)
+        public Task<Models.Estado> GetAsync(int id)
         {
             throw new NotImplementedException();
         }

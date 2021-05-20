@@ -33,21 +33,22 @@ namespace Funcionario.DataAccess
             return _context.SaveChangesAsync();
         }
 
+        public bool Update(Models.Funcionario item)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Models.Funcionario Get(int id)
+        public Task<Models.Funcionario> GetAsync(int id)
         {
-            return _context.Funcionario.Find(id);
+            return _context.Funcionario.FindAsync(id);
         }
 
 
-        public bool Update(Models.Funcionario item)
-        {
-            throw new NotImplementedException();
-        }
     }
 
 
