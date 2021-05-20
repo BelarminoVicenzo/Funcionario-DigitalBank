@@ -33,9 +33,10 @@ namespace Funcionario.DataAccess
             return _context.SaveChangesAsync();
         }
 
-        public bool Update(Models.Funcionario item)
+        public Task Update(Models.Funcionario item)
         {
-            throw new NotImplementedException();
+            _context.Entry(item).State = EntityState.Modified;
+            return _context.SaveChangesAsync();
         }
 
         public bool Delete(int id)

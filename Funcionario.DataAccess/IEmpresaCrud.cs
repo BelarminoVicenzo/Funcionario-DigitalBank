@@ -10,7 +10,7 @@ namespace Funcionario.DataAccess
         Task <List<T>> GetAllAsync();
         Task<T> GetAsync(int id);
         Task Add(T item);
-        bool Update(T item);
+        Task Update(T item);
         bool Delete(int id);
     }
 
