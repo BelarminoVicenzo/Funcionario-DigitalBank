@@ -28,9 +28,7 @@ namespace FuncionarioWeb.Controllers
         // GET: Funcionario
         public async Task<ActionResult> Index()
         {
-            //return View(await db.Funcionario.ToListAsync());
-
-            return View(_db.GetAll());
+            return View(await _db.GetAllAsync());
         }
 
 
@@ -38,8 +36,9 @@ namespace FuncionarioWeb.Controllers
 
         public JsonResult GetAllTest()
         {
-            var  lstFun = _db.GetAll().Select(f => new { Id = f.PK_Funcionario, Nome = f.Nome }); ;
-             return Json(lstFun, JsonRequestBehavior.AllowGet);
+            //var  lstFun = _db.GetAll().Select(f => new { Id = f.PK_Funcionario, Nome = f.Nome }); ;
+            // return Json(lstFun, JsonRequestBehavior.AllowGet);
+            throw new NotImplementedException();
         }
 
         [HttpGet]
