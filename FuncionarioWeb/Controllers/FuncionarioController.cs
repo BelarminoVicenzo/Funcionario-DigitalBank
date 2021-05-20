@@ -45,8 +45,9 @@ namespace FuncionarioWeb.Controllers
         public ActionResult GetFuncionario(int id)
         {
 
-            var funcionario = _db.Get(id);
-            return PartialView("_Edit", funcionario);
+            //var funcionario = _db.GetAsync(id);
+            //return PartialView("_Edit", funcionario);
+            throw new NotImplementedException();
         }
        
         #endregion
@@ -92,7 +93,7 @@ namespace FuncionarioWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Funcionario.Models.Funcionario funcionario = await db.Funcionario.FindAsync(id);
+            Funcionario.Models.Funcionario funcionario = await _db.GetAsync(id.Value);
             if (funcionario == null)
             {
                 return HttpNotFound();
@@ -110,8 +111,7 @@ namespace FuncionarioWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(funcionario).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                await _db.Update(funcionario);
                 return RedirectToAction("Index");
             }
             return View(funcionario);
