@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,11 +16,16 @@ namespace Funcionario.DataAccess
             _context = new EmpresaContext();
         }
 
-        public IEnumerable<Models.Funcionario> GetAll()
+      
+        public List<Models.Funcionario> GetAll()
         {
-           return  _context.Funcionario.ToList();
+            return _context.Funcionario.ToList();
         }
 
+        public Task<List<Models.Funcionario>> GetAllAsync()
+        {
+            return _context.Funcionario.ToListAsync();
+        }
 
         public Models.Funcionario Add(Models.Funcionario item)
         {
