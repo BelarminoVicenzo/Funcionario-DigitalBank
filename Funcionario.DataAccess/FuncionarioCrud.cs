@@ -16,7 +16,7 @@ namespace Funcionario.DataAccess
             _context = new EmpresaContext();
         }
 
-      
+
         public List<Models.Funcionario> GetAll()
         {
             return _context.Funcionario.ToList();
@@ -27,9 +27,10 @@ namespace Funcionario.DataAccess
             return _context.Funcionario.ToListAsync();
         }
 
-        public Models.Funcionario Add(Models.Funcionario item)
+        public Task Add(Models.Funcionario item)
         {
-            throw new NotImplementedException();
+            _context.Funcionario.Add(item);
+            return _context.SaveChangesAsync();
         }
 
         public bool Delete(int id)
@@ -48,6 +49,6 @@ namespace Funcionario.DataAccess
             throw new NotImplementedException();
         }
     }
-    
-    
+
+
 }

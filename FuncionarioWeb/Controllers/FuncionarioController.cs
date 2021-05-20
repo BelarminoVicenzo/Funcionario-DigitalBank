@@ -75,10 +75,8 @@ namespace FuncionarioWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Funcionario.Add(funcionario);
-                await db.SaveChangesAsync();
+                await _db.Add(funcionario);
                 return RedirectToAction("Index");
-
             }
 
             return View(funcionario);

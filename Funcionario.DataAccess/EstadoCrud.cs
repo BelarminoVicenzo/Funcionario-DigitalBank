@@ -33,7 +33,7 @@ namespace Funcionario.DataAccess
         }
 
 
-        public Models.Estado Add(Models.Estado item)
+        public Task Add(Models.Estado item)
         {
             throw new NotImplementedException();
         }
