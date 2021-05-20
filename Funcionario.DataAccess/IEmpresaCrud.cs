@@ -6,7 +6,8 @@ namespace Funcionario.DataAccess
 
     public interface IEmpresaCrud<T> where T : class
     {
-        Task <List<T>> GetAll();
+        List<T> GetAll();
+        Task <List<T>> GetAllAsync();
         T Get(int id);
         T Add(T item);
         bool Update(T item);
