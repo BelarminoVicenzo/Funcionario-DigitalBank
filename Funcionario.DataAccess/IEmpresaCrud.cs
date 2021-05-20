@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
- 
+using System.Threading.Tasks;
+
 namespace Funcionario.DataAccess
 {
 
     public interface IEmpresaCrud<T> where T : class
     {
-        IEnumerable<T> GetAll();
+        Task <List<T>> GetAll();
         T Get(int id);
         T Add(T item);
         bool Update(T item);
