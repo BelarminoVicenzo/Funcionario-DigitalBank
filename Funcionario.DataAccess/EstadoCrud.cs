@@ -2,8 +2,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 namespace Funcionario.DataAccess
 {
@@ -16,9 +17,19 @@ namespace Funcionario.DataAccess
             _context = new EmpresaContext();
         }
 
-        public IEnumerable<Models.Estado> GetAll()
+        public List<Models.Estado> GetAll()
         {
-            return _context.Estado;
+            return  _context.Estado.ToList();
+        }
+        
+        public Task <List<Models.Estado>> GetAllAsync()
+        {
+            return  _context.Estado.ToListAsync();
+        }
+
+        public bool Update(Models.Estado item)
+        {
+            throw new NotImplementedException();
         }
 
 
@@ -38,10 +49,6 @@ namespace Funcionario.DataAccess
         }
 
 
-        public bool Update(Models.Estado item)
-        {
-            throw new NotImplementedException();
-        }
     }
 
 
